@@ -74,6 +74,41 @@ The benchmark provides a controlled setting in which the underlying structure is
 
 Further assumptions, implementation details, and limitations are documented in [`docs/MODEL_LIMITATIONS.md`](docs/MODEL_LIMITATIONS.md).
 
+## Formal methods: Lean 4
+
+AST includes an initial Lean 4 formalization module alongside its Python
+computational experiments.
+
+The Lean module currently provides:
+
+- A finite context of propositions treated as explicit assumptions.
+- A context-entailment relation.
+- A weakening theorem for adding assumptions.
+- Basic propositional reasoning examples.
+- Definitions for refutation and logical counterexamples.
+
+This is an initial formal-methods scaffold, not an automated theory evaluator
+or counterexample-search engine. Lean checks derivations from formal premises;
+it does not establish that those premises are physically true or empirically
+adequate.
+
+### Build the Lean project
+
+Install Lean 4 and Lake using the
+[official Lean installation instructions](https://lean-lang.org/install/).
+
+Then run:
+
+```bash
+cd formal/lean
+lake build
+```
+
+The project version is pinned in `formal/lean/lean-toolchain`.
+
+See [docs/FORMALIZATION.md](docs/FORMALIZATION.md) for scope, definitions,
+and limitations.
+
 ## Installation
 
 Python 3.8 or later is recommended.
