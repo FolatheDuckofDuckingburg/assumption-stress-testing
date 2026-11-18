@@ -4,6 +4,14 @@ This is NOT a physical spacetime model. A circular correlation structure is
 planted in a Gaussian covariance matrix, sampled, and then recovered from
 pairwise Gaussian mutual-information estimates.
 """
+# Repeated-seed evaluation
+python ast_metric_induction.py --repetitions 50
+
+# Parameter sweep
+python ast_metric_induction.py --sweep --repetitions 30 --plot
+
+# Save summary
+python ast_metric_induction.py --repetitions 50 --output results.json
 import argparse
 
 import matplotlib.pyplot as plt
