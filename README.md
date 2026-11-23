@@ -1,186 +1,109 @@
-# Assumption Stress Testing (AST)
-### A Computational Framework for Evaluating Assumptions in the Foundations of Physics
+# AST
+
+### Theoretical Physics Research
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0007--2148--5675-green.svg)](https://orcid.org/0009-0007-2148-5675)
 
-**Assumption Stress Testing (AST)** is an independent computational research project concerned with the systematic examination of assumptions underlying theoretical models, particularly in the foundations of physics.
+**AST is an independent theoretical physics research initiative.** Its work focuses on the mathematical foundations of physical theories, rigorous theoretical derivation, analysis of physical models, and the investigation of possible generalizations or extensions.
 
-The framework is motivated by a methodological question:
+AST is the project's name. It is not expanded into a formal acronym.
 
-> What happens when the assumptions underlying a theoretical model are made explicit, examined individually, and tested for the consequences they impose on the model?
+The research programme is broad in scope. It may investigate established frameworks, unresolved theoretical questions, and candidate models, provided each study is mathematically explicit and appropriately grounded in existing physics.
 
-AST aims to provide a structured approach to identifying assumptions, tracing their mathematical implications, evaluating internal consistency, and distinguishing theoretical plausibility from empirical support.
+## Research scope
 
-The project currently contains exploratory computational experiments. It does not establish a new physical theory or demonstrate that existing theories are invalid.
+Areas of interest include:
 
-## Research objectives
+- **General relativity and gravitation:** spacetime geometry, Einstein's field equations, black holes, gravitational dynamics, and exact or approximate solutions.
+- **Quantum gravity:** conceptual and mathematical approaches to the relationship between quantum theory and gravitation.
+- **Cosmology:** spacetime evolution, cosmological models, and the mathematical foundations of large-scale physical descriptions.
+- **Quantum field theory and particle physics:** field-theoretic structures, symmetries, interactions, and candidate extensions.
+- **Mathematical physics:** differential geometry, analysis, algebraic structures, and mathematical methods used to formulate physical theories.
 
-AST is organized around several methodological objectives:
+These are research directions, not claims of expertise or completed results. Individual studies will define their own scope and prerequisites.
 
-- **Assumption identification:** Make the foundational assumptions of a model explicit rather than treating them as implicit necessities.
-- **Consequence analysis:** Examine the mathematical and logical consequences that follow from those assumptions.
-- **Consistency evaluation:** Distinguish internal mathematical consistency from agreement with physical observations.
-- **Robustness examination:** Investigate how model behaviour changes when assumptions, parameters, or constraints are varied.
-- **Empirical accountability:** Identify what evidence would be required to support, constrain, or reject a proposed model.
+## Research approach
 
-These objectives are methodological. Their usefulness and originality must be evaluated through implementation, comparison with existing methods, and reproducible research.
+AST investigates physical theories through a repeatable mathematical process:
 
-## Methodological principles
+1. **Specify the theory and regime.** Identify the physical system, governing framework, assumptions, approximations, and domain of applicability.
+2. **Formulate the question.** State a precise theoretical problem that can be addressed mathematically.
+3. **Establish the baseline.** Derive or reproduce relevant established results before proposing changes.
+4. **Develop the analysis.** Use analytical derivation, mathematical proof, and—where useful—symbolic or numerical computation.
+5. **Check consistency.** Examine dimensions, limiting cases, symmetries, conservation laws, regularity, stability, and other constraints relevant to the model.
+6. **Extract physical consequences.** Identify what the mathematics implies for observables, physical interpretation, or the structure of the theory.
+7. **Compare with established physics.** Determine which known results must be recovered and what evidence would be needed to distinguish a proposed extension.
+8. **Report limitations.** Separate established results, derived results, numerical evidence, conjectures, and open questions.
 
-AST follows several principles when evaluating theoretical claims.
+AST does not assume that established theories are wrong. A successful theory may be incomplete without being invalid in its tested regime. Mathematical consistency is necessary for a viable model, but it is not by itself evidence that the model describes nature.
 
-### 1. Prediction is not the same as fundamentality
+## First investigation: Schwarzschild spacetime
 
-A theory's successful predictions provide important empirical support within the regimes in which it has been tested. However, predictive success alone does not establish that every assumption of the theory is fundamental or that the theory represents a final description of physical reality.
+The initial research milestone is:
 
-### 2. Incompleteness is not falsification
+**AST-GR-001 — Schwarzschild Spacetime: Mathematical Foundations and Geodesic Structure**
 
-A theory may have unresolved questions or limitations without being invalid within its established domain of applicability.
+This study begins with the Schwarzschild solution of general relativity and examines the geometry and motion it describes. Planned topics include:
 
-### 3. Mathematical consistency is not empirical confirmation
+- The Schwarzschild metric and its coordinate interpretation.
+- Curvature and geometric properties of the spacetime.
+- Timelike and null geodesics.
+- Circular orbits and their stability.
+- The photon sphere and innermost stable circular orbit (ISCO).
+- Limiting cases and consistency checks against established results.
 
-A mathematically consistent model is not necessarily a physically accurate one. Mathematical derivation, empirical evidence, and physical interpretation must be evaluated separately.
+The first objective is reproduction and understanding, not novelty. Any later modification or extension must be motivated, derived explicitly, and tested against the Schwarzschild baseline and relevant physical constraints.
 
-### 4. Successor models carry a correspondence requirement
+See [the AST-GR-001 research brief](research/investigations/AST-GR-001/README.md).
 
-Any proposed alternative or extension must account for established experimental results and recover the successful predictions of existing theories in the regimes where those predictions have been verified.
+## Existing computational and formal work
 
-These principles are not arguments against General Relativity or any other established physical theory. They are standards for evaluating theoretical proposals, including speculative ones.
+The repository's earlier computational and formal-methods work remains part of AST's research history.
 
-## Current computational experiment
+### Synthetic graph-recovery benchmark
 
-### Synthetic graph recovery
+The existing synthetic graph-recovery experiment investigates whether a planted graph structure can be recovered from samples of a Gaussian model using pairwise mutual-information estimates and a top-neighbour inference rule. It is a methodological computational experiment with a known synthetic reference structure.
 
-The repository currently includes an exploratory benchmark implemented in:
+**Scope limitation:** graph recovery in this synthetic setting does not demonstrate spacetime emergence, establish a physical metric, or provide evidence for a theory of gravity. It is not a physical result.
 
-`ast_metric_induction.py`
+### Lean 4 formalization
 
-The experiment investigates whether a known synthetic correlation structure can be recovered using pairwise information-theoretic measurements.
+The initial Lean 4 module explores finite contexts of propositions, entailment, weakening, and basic propositional reasoning. It is a small formal-methods scaffold. It does not establish the physical truth of premises or the empirical adequacy of a physical theory.
 
-The pipeline proceeds as follows:
+See [docs/FORMALIZATION.md](docs/FORMALIZATION.md) for its documented scope and limitations.
 
-1. **Structure generation:** A circular graph structure is specified as the planted reference network.
-2. **Covariance construction:** Correlations corresponding to the reference structure are encoded in a Gaussian covariance matrix.
-3. **Synthetic sampling:** Observations are generated from the resulting multivariate Gaussian distribution.
-4. **Information estimation:** Pairwise mutual information is estimated under a bivariate-Gaussian assumption.
-5. **Graph inference:** Each node is connected to the two nodes with the highest estimated mutual-information scores.
-6. **Evaluation:** The inferred graph is compared with the planted reference structure using edge precision, recall, and F1 score.
+## Research standards
 
-The benchmark provides a controlled setting in which the underlying structure is known, allowing the graph-recovery procedure to be evaluated against a reference.
+AST follows these standards:
 
-**Scope limitation:** This experiment demonstrates a synthetic graph-recovery pipeline. It does not demonstrate that spacetime emerges from information, establish a physical metric, or provide empirical evidence for a new theory of gravity.
+- **Mathematical explicitness:** definitions, assumptions, conventions, and derivations must be inspectable.
+- **Respect for established results:** reproduce relevant baselines and account for verified predictions.
+- **Physical motivation:** do not alter a theory merely to generate mathematical novelty.
+- **Consistency before interpretation:** check mathematical and physical constraints before assigning meaning to a result.
+- **Evidence-aware claims:** distinguish mathematical possibility from physical plausibility and empirical support.
+- **Reproducibility:** document derivations, code, parameters, numerical methods, and sources where applicable.
+- **Honest reporting:** negative results, failed approaches, and unresolved questions are legitimate research outcomes.
 
-Further assumptions, implementation details, and limitations are documented in [`docs/MODEL_LIMITATIONS.md`](docs/MODEL_LIMITATIONS.md).
+## Repository map
 
-## Formal methods: Lean 4
+The repository is being organized around the following research areas:
 
-AST includes an initial Lean 4 formalization module alongside its Python
-computational experiments.
+- `research/charter/` — scope, standards, and research governance.
+- `research/general_relativity/` — general-relativity research notes and studies.
+- `research/investigations/` — individually scoped research investigations.
+- `docs/` — project documentation and methodological notes.
+- `formal/` — Lean 4 formalization work.
+- Existing computational code and tests — retained as exploratory methodological work.
 
-The Lean module currently provides:
+The directory structure will grow as actual studies and reproducible materials are added. A directory or research brief does not imply that a result has been derived or validated.
 
-- A finite context of propositions treated as explicit assumptions.
-- A context-entailment relation.
-- A weakening theorem for adding assumptions.
-- Basic propositional reasoning examples.
-- Definitions for refutation and logical counterexamples.
+## Reproducibility and interpretation
 
-This is an initial formal-methods scaffold, not an automated theory evaluator
-or counterexample-search engine. Lean checks derivations from formal premises;
-it does not establish that those premises are physically true or empirically
-adequate.
+For computational work, record software versions, parameters, random seeds, numerical methods, and evaluation procedures where relevant. For analytical work, record definitions, assumptions, intermediate steps, conventions, and references.
 
-### Build the Lean project
-
-Install Lean 4 and Lake using the
-[official Lean installation instructions](https://lean-lang.org/install/).
-
-Then run:
-
-```bash
-cd formal/lean
-lake build
-```
-
-The project version is pinned in `formal/lean/lean-toolchain`.
-
-See [docs/FORMALIZATION.md](docs/FORMALIZATION.md) for scope, definitions,
-and limitations.
-
-## Installation
-
-Python 3.8 or later is recommended.
-
-Install the required dependencies:
-
-```bash
-python -m pip install numpy matplotlib networkx
-```
-
-## Usage
-
-Run the experiment with visualization:
-
-```bash
-python ast_metric_induction.py
-```
-
-Run without generating a plot:
-
-```bash
-python ast_metric_induction.py --no-plot --nodes 24 --samples 4000 --seed 42
-```
-
-The command-line options allow the synthetic benchmark to be configured, including the number of nodes, sample count, and random seed.
-
-## Testing
-
-Run the repository's unit tests:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-The tests are intended to check software behaviour and implementation correctness. Passing unit tests should not be interpreted as validation of a physical hypothesis.
-
-## Research status and limitations
-
-AST is an exploratory research methodology project.
-
-The current implementation is limited to a synthetic computational benchmark. In particular, it does not:
-
-- Establish a new physical theory.
-- Demonstrate the emergence of spacetime or a physical metric.
-- Challenge or falsify General Relativity.
-- Establish empirical validity for an alternative model.
-- Demonstrate that the AST methodology is novel relative to existing research.
-
-Potential future work includes:
-
-- Formalizing the AST methodology into a reproducible evaluation protocol.
-- Reviewing existing literature on model criticism, sensitivity analysis, and theoretical foundations.
-- Expanding the range of synthetic benchmarks.
-- Evaluating alternative graph-recovery and information-estimation methods.
-- Investigating how assumptions influence model behaviour under controlled perturbations.
-- Developing physical models with explicit, mathematically derived, and empirically testable consequences.
-
-Future extensions should be guided by reproducibility, clear mathematical definitions, appropriate baselines, and transparent reporting of limitations.
-
-## Reproducibility
-
-Computational experiments should make their assumptions, parameters, and evaluation procedures inspectable.
-
-Where applicable, experiments should document:
-
-- Random seeds and simulation parameters.
-- Mathematical and statistical assumptions.
-- Data-generation procedures.
-- Evaluation metrics.
-- Known limitations and sources of uncertainty.
-
-Results should be interpreted within the scope of the experiment that produced them.
+Software tests establish properties of an implementation; they do not validate a physical hypothesis. Numerical agreement with a known result is a verification step, not automatically a novel contribution.
 
 ## License
 
@@ -191,7 +114,3 @@ This project is distributed under the [Apache License 2.0](LICENSE).
 **Folarera Kassim**
 
 [ORCID: 0009-0007-2148-5675](https://orcid.org/0009-0007-2148-5675)
-
----
-
-*Assumption Stress Testing — making theoretical assumptions explicit, examining their consequences, and evaluating what they actually support.*
