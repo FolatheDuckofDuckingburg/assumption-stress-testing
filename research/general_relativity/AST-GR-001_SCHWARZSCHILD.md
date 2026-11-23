@@ -12,7 +12,7 @@ This study is deliberately focused on a known solution. Its first purpose is to 
 
 ## 2. Scope
 
-The Schwarzschild solution describes the vacuum exterior spacetime of a spherically symmetric, non-rotating, uncharged gravitating body. In the black-hole interpretation, the relevant mass parameter is (M).
+The Schwarzschild solution describes the vacuum exterior spacetime of a spherically symmetric, non-rotating, uncharged gravitating body. In the black-hole interpretation, the relevant mass parameter is $M$.
 
 The study will cover:
 
@@ -30,7 +30,7 @@ The study will not initially cover rotating black holes, charged black holes, qu
 
 ## 3. Conventions and starting point
 
-Use metric signature ((- + + +)), Schwarzschild coordinates ((t,r,\theta,\phi)), and initially geometric units (G=c=1). The line element is
+Use metric signature $(- + + +)$, Schwarzschild coordinates $(t,r,\theta,\phi)$, and initially geometric units $G=c=1$. The line element is
 
 \[
  ds^2 = -\left(1-\frac{2M}{r}\right)dt^2
@@ -39,9 +39,9 @@ Use metric signature ((- + + +)), Schwarzschild coordinates ((t,r,\theta,\phi)),
  + r^2\sin^2\theta\,d\phi^2.
 \]
 
-When restoring SI units, replace the characteristic length (2M) by (2GM/c^2). Units and conventions must be stated consistently throughout all derivations.
+When restoring SI units, replace the characteristic length $2M$ by $2GM/c^2$. Units and conventions must be stated consistently throughout all derivations.
 
-The coordinate expression is singular at (r=2M), but this alone does not establish a curvature singularity. The study must distinguish coordinate singularities from invariant curvature singularities and explain the coordinate domain being used.
+The coordinate expression is singular at $r=2M$, but this alone does not establish a curvature singularity. The study must distinguish coordinate singularities from invariant curvature singularities and explain the coordinate domain being used.
 
 ## 4. Derivation programme
 
@@ -88,7 +88,7 @@ For the Schwarzschild coordinate chart, identify the horizon radius:
 r_s = 2M = \frac{2GM}{c^2}.
 \]
 
-Use curvature invariants and, where useful, a horizon-regular coordinate system to distinguish the coordinate behaviour at the horizon from the physical curvature singularity at (r=0).
+Use curvature invariants and, where useful, a horizon-regular coordinate system to distinguish the coordinate behaviour at the horizon from the physical curvature singularity at $r=0$.
 
 ### 4.6 Weak-field limit
 
@@ -99,8 +99,8 @@ Show how the metric approaches the weak-field, slow-motion regime and identify t
 The study is not complete until the following have been checked:
 
 - Metric signature and units are consistent.
-- The inverse metric satisfies (g^{\mu\alpha}g_{\alpha\nu}=\delta^\mu_\nu).
-- The vacuum exterior satisfies (R_{\mu\nu}=0).
+- The inverse metric satisfies $g^{\mu\alpha}g_{\alpha\nu}=\delta^\mu_\nu$.
+- The vacuum exterior satisfies $R_{\mu\nu}=0$.
 - Curvature invariants are coordinate-independent and have the expected dimensions.
 - Conserved quantities follow from the relevant symmetries.
 - Timelike and null radial equations are derived separately.
