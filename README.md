@@ -94,7 +94,9 @@ research/
 ├── black_hole_physics/
 ├── causal_set_theory/
 ├── quantum_gravity/
-└── cosmology/
+├── cosmology/
+├── theoretical_particle_physics/
+└── quantum_field_theory/
 
 docs/
 formal/
