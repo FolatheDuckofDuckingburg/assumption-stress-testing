@@ -19,7 +19,8 @@ AST's areas of interest include:
 - **Causal set theory:** discrete spacetime models, causal order, local finiteness, continuum approximation, and the relationship between causal structure and geometry.
 - **Quantum gravity:** mathematical approaches to the relationship between quantum theory and gravitation.
 - **Cosmology:** spacetime dynamics, cosmological models, and the large-scale structure and evolution of the universe.
-- **Quantum field theory and particle physics:** field-theoretic structures, symmetries, interactions, and model analysis.
+- **Theoretical particle physics:** fundamental particles, interactions, gauge symmetries, the Standard Model, phenomenology, and carefully specified extensions.
+- **Quantum field theory:** the mathematical framework of quantum fields, quantization, gauge theories, renormalization, and effective field theory.
 - **Mathematical physics:** the mathematical methods and structures used to formulate and investigate physical theories.
 - **String theory and related frameworks:** their mathematical formulation, consistency conditions, and physical implications.
 
@@ -60,6 +61,8 @@ AST does not presume that established theories are wrong. Stress-testing an assu
 - [Causal set theory](research/causal_set_theory/README.md) — discrete spacetime and causal structure.
 - [Quantum gravity](research/quantum_gravity/README.md) — approaches to quantum descriptions of gravitation.
 - [Cosmology](research/cosmology/README.md) — theoretical models of the universe and its evolution.
+- [Theoretical particle physics](research/theoretical_particle_physics/README.md) — particle models, symmetries, interactions, and phenomenology.
+- [Quantum field theory](research/quantum_field_theory/README.md) — mathematical foundations and methods for quantum fields.
 - [AST-GR-001](research/general_relativity/AST-GR-001_SCHWARZSCHILD.md) — foundational study of Schwarzschild spacetime and geodesic structure.
 
 ## Initial research milestone
