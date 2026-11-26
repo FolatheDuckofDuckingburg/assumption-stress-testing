@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - ast-ri-ri01-source-registry
+      - ast-ri-ri012-theoretical-physics-search
     paths:
       - "ast-ri/ri01-source-registry/**"
       - ".github/workflows/ast-ri-ri01-tests.yml"
