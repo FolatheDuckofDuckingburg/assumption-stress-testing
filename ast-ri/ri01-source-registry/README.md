@@ -60,11 +60,7 @@ The example identifiers above are illustrative placeholders, not a real citation
 
 ## Tests
 
-```bash
-python -m pip install -e ".[test]"
-```
-
-The test suite uses Python's standard-library `unittest` and can be run directly:
+The test suite uses Python's standard-library `unittest`; no test extra is required:
 
 ```bash
 PYTHONPATH=src python -m unittest discover -s tests -v
