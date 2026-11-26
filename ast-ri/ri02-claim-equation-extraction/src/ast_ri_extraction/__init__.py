@@ -1,5 +1,6 @@
-"""AST-RI RI-02: provenance-preserving candidate extraction."""
+"""AST-RI RI-02: provenance-preserving candidate extraction and records."""
 
+from .assumptions import AssumptionKind, AssumptionRecord
 from .extractor import (
     ClaimCandidate,
     EquationCandidate,
@@ -8,6 +9,8 @@ from .extractor import (
 )
 
 __all__ = [
+    "AssumptionKind",
+    "AssumptionRecord",
     "ClaimCandidate",
     "EquationCandidate",
     "ExtractionResult",
