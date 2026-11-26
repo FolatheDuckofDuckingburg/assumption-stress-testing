@@ -1,0 +1,40 @@
+name: AST-RI RI-01 tests
+
+on:
+  pull_request:
+    paths:
+      - "ast-ri/ri01-source-registry/**"
+      - ".github/workflows/ast-ri-ri01-tests.yml"
+  push:
+    branches:
+      - main
+      - ast-ri-ri01-source-registry
+    paths:
+      - "ast-ri/ri01-source-registry/**"
+      - ".github/workflows/ast-ri-ri01-tests.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package
+        working-directory: ast-ri/ri01-source-registry
+        run: python -m pip install -e .
+
+      - name: Run unit tests
+        working-directory: ast-ri/ri01-source-registry
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -v

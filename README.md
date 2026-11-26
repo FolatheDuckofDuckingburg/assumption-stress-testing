@@ -56,6 +56,8 @@ AST does not presume that established theories are wrong. Stress-testing an assu
 ## Research organization
 
 - [Research charter](research/charter/RESEARCH_CHARTER.md) — scope, standards, and operating principles.
+- [AST-RI specification](ast-ri/README.md) — design specification for a theoretical-physics research-intelligence system.
+- [RI-01 Source Registry](ast-ri/ri01-source-registry/README.md) — initial local bibliographic metadata registry.
 - [General relativity](research/general_relativity/README.md) — relativistic gravitation and spacetime geometry.
 - [Black-hole physics](research/black_hole_physics/README.md) — black-hole spacetimes and their physical properties.
 - [Causal set theory](research/causal_set_theory/README.md) — discrete spacetime and causal structure.
@@ -97,6 +99,10 @@ research/
 ├── cosmology/
 ├── theoretical_particle_physics/
 └── quantum_field_theory/
+
+ast-ri/
+├── README.md
+└── ri01-source-registry/
 
 docs/
 formal/
