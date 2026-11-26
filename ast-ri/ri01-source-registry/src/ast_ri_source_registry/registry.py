@@ -9,6 +9,8 @@ import sqlite3
 from typing import Iterator
 
 from .models import Source, SourceType
+from .providers import ProviderRecord
+from .provenance import initialize_provenance_schema, list_provider_records, store_provider_record
 
 
 class DuplicateSourceError(ValueError):
@@ -20,7 +22,7 @@ class SourceNotFoundError(LookupError):
 
 
 class SourceRegistry:
-    """A small local registry with no network or full-text ingestion."""
+    """A local bibliographic registry with provider-level provenance."""
 
     def __init__(self, database_path: str | Path = "ast_ri_sources.sqlite3") -> None:
         self.database_path = Path(database_path)
@@ -31,6 +33,7 @@ class SourceRegistry:
     def _connect(self) -> Iterator[sqlite3.Connection]:
         connection = sqlite3.connect(self.database_path)
         connection.row_factory = sqlite3.Row
+        connection.execute("PRAGMA foreign_keys = ON")
         try:
             yield connection
             connection.commit()
@@ -63,6 +66,7 @@ class SourceRegistry:
             connection.execute(
                 "CREATE INDEX IF NOT EXISTS idx_sources_title ON sources(title)"
             )
+            initialize_provenance_schema(connection)
 
     @staticmethod
     def _to_source(row: sqlite3.Row) -> Source:
@@ -106,6 +110,31 @@ class SourceRegistry:
                 "A source with this source ID, DOI, arXiv ID, or URL already exists."
             ) from exc
         return source
+
+    def add_provider_record(self, record: ProviderRecord) -> int:
+        """Attach a provider snapshot to an existing canonical source record.
+
+        The caller must first reconcile the provider record with a canonical
+        source and pass a record whose source_id matches that stored source.
+        This avoids silently merging potentially different works.
+        """
+        with self._connect() as connection:
+            exists = connection.execute(
+                "SELECT 1 FROM sources WHERE source_id = ?",
+                (record.source.source_id,),
+            ).fetchone()
+            if exists is None:
+                raise SourceNotFoundError(record.source.source_id)
+            return store_provider_record(connection, record)
+
+    def provider_records(self, source_id: str) -> list[dict]:
+        with self._connect() as connection:
+            exists = connection.execute(
+                "SELECT 1 FROM sources WHERE source_id = ?", (source_id,)
+            ).fetchone()
+            if exists is None:
+                raise SourceNotFoundError(source_id)
+            return list_provider_records(connection, source_id)
 
     def get_source(self, source_id: str) -> Source:
         with self._connect() as connection:
