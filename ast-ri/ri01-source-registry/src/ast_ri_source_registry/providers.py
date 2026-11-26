@@ -10,7 +10,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
-import re
 import time
 from typing import Callable
 from urllib.error import HTTPError, URLError
@@ -112,16 +111,22 @@ class ArxivProvider(MetadataProvider):
         if entry is None:
             raise ProviderError(f"No arXiv record found for {normalized}.")
 
-        title = " ".join((entry.findtext("atom:title", default="", namespaces=ns)).split())
+        title = " ".join(entry.findtext(
+            "atom:title", default="", namespaces=ns
+        ).split())
         author_names = [
             " ".join((node.text or "").split())
             for node in entry.findall("atom:author/atom:name", ns)
         ]
-        published = entry.findtext("atom:published", default="", namespaces=ns)
+        published = entry.findtext(
+            "atom:published", default="", namespaces=ns
+        )
         published_date = published[:10] if published else None
-        doi = entry.findtext("atom:doi", default=None, namespaces=ns)
-        summary = entry.findtext("atom:summary", default="", namespaces=ns)
-        del summary  # Abstract text is deliberately not stored by RI-01.1.
+
+        # arXiv-specific metadata uses its own XML namespace.
+        doi = entry.findtext("{http://arxiv.org/schemas/atom}doi")
+        if doi is None:
+            doi = entry.findtext("atom:doi", namespaces=ns)
 
         if not title or not author_names:
             raise ProviderError("arXiv record is missing a title or authors.")
@@ -173,11 +178,14 @@ class CrossrefProvider(MetadataProvider):
         if not title or not authors:
             raise ProviderError("Crossref record is missing a title or authors.")
 
+        def date_parts_for(key: str):
+            value = item.get(key) or {}
+            return value.get("date-parts") or []
+
         date_parts = (
-            item.get("published-print", {}).get("date-parts")
-            or item.get("published-online", {}).get("date-parts")
-            or item.get("created", {}).get("date-parts")
-            or []
+            date_parts_for("published-print")
+            or date_parts_for("published-online")
+            or date_parts_for("created")
         )
         published_date = None
         year = None
@@ -185,17 +193,29 @@ class CrossrefProvider(MetadataProvider):
             parts = date_parts[0]
             year = int(parts[0])
             if len(parts) >= 3:
-                published_date = f"{int(parts[0]):04d}-{int(parts[1]):02d}-{int(parts[2]):02d}"
+                published_date = (
+                    f"{int(parts[0]):04d}-{int(parts[1]):02d}-{int(parts[2]):02d}"
+                )
             elif len(parts) == 2:
                 published_date = f"{int(parts[0]):04d}-{int(parts[1]):02d}-01"
             else:
                 published_date = f"{int(parts[0]):04d}-01-01"
 
+        type_map = {
+            "journal-article": SourceType.JOURNAL_ARTICLE,
+            "proceedings-article": SourceType.CONFERENCE_PAPER,
+            "book": SourceType.BOOK,
+            "book-chapter": SourceType.BOOK,
+            "posted-content": SourceType.PREPRINT,
+            "dissertation": SourceType.THESIS,
+            "review": SourceType.REVIEW,
+        }
+        source_type = type_map.get(item.get("type"), SourceType.OTHER)
         url = item.get("URL") or f"https://doi.org/{normalized}"
         source = Source(
             title=title,
             authors=tuple(authors),
-            source_type=SourceType.JOURNAL_ARTICLE,
+            source_type=source_type,
             year=year,
             published_date=published_date,
             doi=normalized,
